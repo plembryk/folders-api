@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+  group-words-process:
+    container_name: group-words-process
+    build:
+      context: .
+      network: host
+    volumes:
+      - ./src:/src
+    depends_on:
+      - folders-api
+    restart: on-failure
+    environment:
+      DJANGO_ALLOWED_HOSTS: "*"
+      DJANGO_DATABASE_HOST: "folders-postgres"
+      DJANGO_DATABASE_NAME: "folders_local"
+      DJANGO_DATABASE_USER: "postgres"
+      DJANGO_DATABASE_PASSWORD: "password"
+      DJANGO_DATABASE_PORT: "5432"
+      DJANGO_DATABASE_ENGINE: "django.db.backends.postgresql"
+    command: python src/manage.py process_words
+
+  folders-api:
+    container_name: folders-api
+    build:
+      context: .
+      network: host
+    volumes:
+      - ./src:/src
+    depends_on:
+      - folders-postgres
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_ALLOWED_HOSTS: "*"
+      DJANGO_DATABASE_HOST: "folders-postgres"
+      DJANGO_DATABASE_NAME: "folders_local"
+      DJANGO_DATABASE_USER: "postgres"
+      DJANGO_DATABASE_PASSWORD: "password"
+      DJANGO_DATABASE_PORT: "5432"
+      DJANGO_DATABASE_ENGINE: "django.db.backends.postgresql"
+    command: bash -c "python src/manage.py migrate && python src/manage.py runserver 0.0.0.0:8000"
+
+  folders-postgres:
+    container_name: folders-postgres
+    image: postgres:12
+    restart: always
+    ports:
+      - "65432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "folders_local"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+    driver: local

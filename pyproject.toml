@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "python-project"
+version = "0.1.0"
+description = ""
+authors = ["Piotr Lembryk"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = "3.2"
+djangorestframework = "3.12.4"
+psycopg2-binary = "^2.9.10"
+django-extensions = "^3.2.3"
+pytest-django = "^4.9.0"
+structlog = "^24.4.0"
+
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-django = "^4.9.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+DJANGO_SETTINGS_MODULE = "folder_api.settings"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
