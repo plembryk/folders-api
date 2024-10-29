@@ -26,10 +26,10 @@ class Word(models.Model):
     add_date = models.DateTimeField()
 
     class Meta:
-        unique_together = ('batch_id', 'name')
+        unique_together = ("batch_id", "name")
         indexes = [
-            models.Index(fields=['batch_id']),
-            models.Index(fields=['word_group']),
+            models.Index(fields=["batch_id"]),
+            models.Index(fields=["word_group"]),
         ]
 
     def __str__(self):

@@ -75,6 +75,16 @@ After executing the above steps, Pytest will run all the tests in the project, a
 
 ## API Endpoints
 
+### API Documentation
+
+This project uses Swagger for API documentation, providing a UI for exploring the available endpoints.
+
+- **Swagger UI endpoint**: `/swagger`
+- **Redoc endpoint**: `/redoc`
+
+You can use these interfaces to explore and test the API endpoints for word grouping and folder management functionalities.
+
+
 ### Folder Endpoints
 #### List All Folders
 - **Endpoint**: `api/folders`

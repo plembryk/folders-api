@@ -1,15 +1,19 @@
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.mixins import (CreateModelMixin, ListModelMixin,
-                                   RetrieveModelMixin)
+from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from .exceptions import FolderDoesNotExistException, GroupApiException
 from .models import Folder, Word, WordGroup
-from .serializers import (FolderBasicSerializer, FolderSerializer,
-                          MoveWordGroupSerializer, WordBatchCreateSerializer,
-                          WordGroupSerializer, WordSerializer)
+from .serializers import (
+    FolderBasicSerializer,
+    FolderSerializer,
+    MoveWordGroupSerializer,
+    WordBatchCreateSerializer,
+    WordGroupSerializer,
+    WordSerializer,
+)
 from .services.folders import create_folder
 from .services.word_groups import move_word_groups
 from .services.words import create_words

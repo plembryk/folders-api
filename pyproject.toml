@@ -13,6 +13,7 @@ psycopg2-binary = "^2.9.10"
 django-extensions = "^3.2.3"
 pytest-django = "^4.9.0"
 structlog = "^24.4.0"
+drf-yasg = "^1.21.8"
 
 
 
